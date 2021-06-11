@@ -10,7 +10,7 @@ cd /c/Python\ Exercise/shopping-cart
 ## Setup
 Use your text editor or the command-line to create a file in that repo called "shopping_cart.py", and then place the following contents inside:
 
-# shopping_cart.py
+### shopping_cart.py
 ```
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
@@ -50,7 +50,7 @@ def to_usd(my_price):
     return f"${my_price:,.2f}" #> $12,000.71
 
 ```
-# TODO: write some Python code here to produce the desired output
+### TODO: write some Python code here to produce the desired output
 
 print(products)
 
