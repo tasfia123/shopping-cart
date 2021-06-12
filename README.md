@@ -60,8 +60,9 @@ conda create -n shopping-env python=3.7 # (first time only)
 conda activate shopping-env
 ```
 From within the virtual environment, install the pip package:
-pip install -r requirements.txt
-
+ ```
+ pip install -r requirements.txt
+ ```
 Add a new ".env" file to the root directory of this repo, and place contents like the following inside:
 The Tax Rate can be for any state tax that you are interested in using 
  ```
