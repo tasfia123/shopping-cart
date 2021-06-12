@@ -20,8 +20,9 @@ products = [
     {"id":17, "name": "Rendered Duck Fat", "department": "meat seafood", "aisle": "poultry counter", "price": 9.99},
     {"id":18, "name": "Pizza for One Suprema Frozen Pizza", "department": "frozen", "aisle": "frozen pizza", "price": 12.50},
     {"id":19, "name": "Gluten Free Quinoa Three Cheese & Mushroom Blend", "department": "dry goods pasta", "aisle": "grains rice dried goods", "price": 3.99},
-    {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
-] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
+    {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25},
+    {"id":21, "name": "Organic Bananas", "department": "Grocery pounds", "aisle": "fresh produce", "price": 0.79}
+    ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
 
 def to_usd(my_price):
@@ -38,8 +39,10 @@ def to_usd(my_price):
 
 
 #
-#INFO CAPTURE / INPUT
-
+#INPUT
+#Handling Pricing per Pound
+#what is # of item sold? 
+# is the item sold per pound or quantity? 
 product_ids = []
 
 subtotal_price = 0
@@ -48,7 +51,7 @@ valid_ids = [str(p["id"]) for p in products]
 selected_ids = []
 
 while True:
-    selected_id = input("Please input a product identifier, or 'DONE' if there are no more items:") #> "8" (string)
+    selected_id = input("Please input a product identifier, or 'DONE' if there are no more items:") 
     if selected_id == "DONE":
         break
     elif str(selected_id) in valid_ids:
@@ -60,16 +63,26 @@ while True:
 
 def lookup_product_by_id(product_id):
     matching_products = [product for product in products if product["id"] == product_id]
-    return matching_products[0] # because the line above gives us a list and we want to return a single item.
+    return matching_products[0] 
 
-# PRINT RECEIPT
-#
-import datetime
-now = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
-running_total = 0
+#Configuring Sales Tax Rate
+
 from dotenv import load_dotenv
 import os
 load_dotenv()
+TAX_RATE = os.getenv("TAX_RATE")
+
+print("-------------------------------")
+print("This is the state tax rate:", float(TAX_RATE)*100, "%")
+print("-------------------------------")
+
+
+# PRINT RECEIPT
+
+import datetime
+now = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
+running_total = 0
+
 def to_usd(p):
     return "${0:,.2f}".format(p)
 
@@ -87,6 +100,7 @@ print("---------------------------------")
 print("CHECKOUT AT:" + str(now)) 
 
 
+
 # The name and price of each shopping cart item, price being formatted as US dollars and cents (e.g. $1.50)
 # The total cost of all shopping cart items, formatted as US dollars and cents (e.g. $4.50), calculated as the sum of their prices
 print("-------------------------------")
@@ -98,7 +112,7 @@ for selected_id in selected_ids:
     print("... " + matching_product["name"] + " " + "(" + to_usd(matching_product["price"]) + ")")
 
 # The amount of tax owed (e.g. $0.39), calculated by multiplying the total cost by a New York City sales tax rate of 8.75% 
-tax_price = subtotal_price * 0.0875
+tax_price = subtotal_price * float(TAX_RATE)
 total_price = subtotal_price + tax_price
 print("---------------------------------")
 print("SUBTOTAL PRICE:", to_usd(subtotal_price)) 
@@ -109,4 +123,5 @@ print("TOTAL PRICE:", to_usd(total_price))
 print("---------------------------------")
 print("THANKS, SEE YOU AGAIN SOON!")
 print("---------------------------------")
+
 
