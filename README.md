@@ -5,8 +5,10 @@ This repo contains a instructions to build a technology interface for a checkout
 ## Installation
 Clone or download this repo onto your local computer.
 Then navigate there from the command line (subsequent commands assume you are running them from the local repository's root directory):
-
+```
 cd /c/Python\ Exercise/shopping-cart
+```
+
 ## Setup
 Use your text editor or the command-line to create a file in that repo called "shopping_cart.py", and then place the following contents inside:
 
@@ -50,9 +52,15 @@ def to_usd(my_price):
     return f"${my_price:,.2f}" #> $12,000.71
 
 ```
-### TODO: write some Python code here to produce the desired output
-
-print(products)
 
 ### Configuring Environment Variables
+Add a new ".env" file to the root directory of this repo, and place contents like the following inside:
+ ```
+ TAX_RATE=0.0875
+```
+
 ## Usage
+Run the app:
+```
+python shopping_cart.py
+```
