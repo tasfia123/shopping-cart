@@ -53,10 +53,10 @@ def to_usd(my_price):
 
 ```
 
-### Configuring Environment Variables
+## Configuring Environment Variables
 Create and activate a new Anaconda virtual environment:
 ```
-conda create -n shopping-env python=3.7 # (first time only)
+conda create -n shopping-env python=3.8
 conda activate shopping-env
 ```
 From within the virtual environment, install the pip package:
@@ -64,7 +64,8 @@ From within the virtual environment, install the pip package:
  pip install -r requirements.txt
  ```
 Add a new ".env" file to the root directory of this repo, and place contents like the following inside:
-The Tax Rate can be for any state tax that you are interested in using 
+
+Note: You can populate the Tax Rate  for any state tax that you are interested in using.
  ```
  TAX_RATE=0.0875
 ```
