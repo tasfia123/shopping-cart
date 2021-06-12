@@ -54,7 +54,7 @@ while True:
     elif str(selected_id) in valid_ids:
         selected_ids.append(selected_id)
     else: 
-        print("OH, detected invalid input! Please try again...")
+        print("Detected invalid input! Please type a valid product identifier...")
         next
 
 
@@ -67,19 +67,28 @@ def lookup_product_by_id(product_id):
 import datetime
 now = datetime.datetime.now().strftime("%Y-%m-%d %I:%M:%S %p")
 running_total = 0
+from dotenv import load_dotenv
+import os
+load_dotenv()
+def to_usd(p):
+    return "${0:,.2f}".format(p)
+
+## A grocery store name of your choice
 
 print("-------------------------------")
 print("TS Grocery Store")
+# A grocery store phone number and/or website URL and/or address of choice
 print("-------------------------------")
 print("Web: www.TSGroceryStore.com")
 print("Phone: 1.123.456.7890")
-
+#The date and time of the beginning of the checkout process, formatted in a human-friendly way 
 ##print checkout time 
 print("---------------------------------")
 print("CHECKOUT AT:" + str(now)) 
 
 
-
+# The name and price of each shopping cart item, price being formatted as US dollars and cents (e.g. $1.50)
+# The total cost of all shopping cart items, formatted as US dollars and cents (e.g. $4.50), calculated as the sum of their prices
 print("-------------------------------")
 print("Shopping Cart Items:")
 for selected_id in selected_ids:
@@ -88,12 +97,15 @@ for selected_id in selected_ids:
     subtotal_price = subtotal_price + matching_product["price"]
     print("... " + matching_product["name"] + " " + "(" + to_usd(matching_product["price"]) + ")")
 
+# The amount of tax owed (e.g. $0.39), calculated by multiplying the total cost by a New York City sales tax rate of 8.75% 
 tax_price = subtotal_price * 0.0875
 total_price = subtotal_price + tax_price
 print("---------------------------------")
 print("SUBTOTAL PRICE:", to_usd(subtotal_price)) 
 print("TAX:", to_usd(tax_price)) 
+# The total amount owed, formatted as US dollars and cents (e.g. $4.89), calculated by adding together the amount of tax owed plus the total cost of all shopping cart items
 print("TOTAL PRICE:", to_usd(total_price)) 
+# A friendly message thanking the customer and/or encouraging the customer to shop again
 print("---------------------------------")
 print("THANKS, SEE YOU AGAIN SOON!")
 print("---------------------------------")
